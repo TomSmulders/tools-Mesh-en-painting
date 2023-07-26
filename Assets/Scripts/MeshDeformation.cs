@@ -22,6 +22,8 @@ public class MeshDeformation : MonoBehaviour
 
     private Vector3[] defauld, modified;
 
+    Vector3 point;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,17 +51,19 @@ public class MeshDeformation : MonoBehaviour
                 float smoothingFactor = 2f;
                 float force = stength / (1f + hit.point.sqrMagnitude);
 
-                if (distance < 0.1f)
+                if (distance < 0.3f)
                 {
                     Vector3 direction = Vector3.Normalize(modified[i] - ball.transform.position);
+                    Debug.Log("hit");
 
                     if (Input.GetMouseButton(0)) 
                     {
                         modified[i] = modified[i] + (direction * force) / smoothingFactor;
+
                     }
                     else if (Input.GetMouseButton(1)) 
                     {
-                        modified[i] = modified[i] + (direction * force) / smoothingFactor;
+                        modified[i] = modified[i] + (-direction * force) / smoothingFactor;
                     }
                 }
 

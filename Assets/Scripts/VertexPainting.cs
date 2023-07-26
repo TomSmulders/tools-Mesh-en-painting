@@ -16,7 +16,7 @@ public class VertexPainting : MonoBehaviour
 
     public GameObject ball;
 
-    [Range(0.5f, 5f)]
+    [Range(0.1f, 5f)]
 
     public float radius = 2f;
 
@@ -67,7 +67,7 @@ public class VertexPainting : MonoBehaviour
 
                 float distance = Vector3.Distance(vertices[i], hit.point);
 
-                if (distance < 0.2)
+                if (distance < radius)
                 {
                     if (Input.GetMouseButton(0))
                     {
