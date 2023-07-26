@@ -48,7 +48,6 @@ public class VertexPainting : MonoBehaviour
         //        colors[i] = Color.green;
         //    }
         //}
-        // assign the array of colors to the Mesh.
 
     }
 
@@ -65,10 +64,10 @@ public class VertexPainting : MonoBehaviour
 
             for (int i = 0; i < vertices.Length; i++)
             {
-                Vector3 distance = vertices[i] - hit.point;
 
+                float distance = Vector3.Distance(vertices[i], hit.point);
 
-                if (distance.sqrMagnitude < radius)
+                if (distance < 0.2)
                 {
                     if (Input.GetMouseButton(0))
                     {

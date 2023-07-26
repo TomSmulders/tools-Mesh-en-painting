@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class MeshDeformation : MonoBehaviour
 {
@@ -43,23 +44,29 @@ public class MeshDeformation : MonoBehaviour
 
             for (int i = 0; i < modified.Length; i++)
             {
-                Vector3 distance = modified[i] - hit.point;
+                float distance = Vector3.Distance(modified[i], hit.point);
 
                 float smoothingFactor = 2f;
                 float force = stength / (1f + hit.point.sqrMagnitude);
 
-                if (distance.sqrMagnitude < radius)
+                if (distance < 0.1f)
                 {
+                    Vector3 direction = Vector3.Normalize(modified[i] - ball.transform.position);
+
                     if (Input.GetMouseButton(0)) 
                     {
-                        modified[i] = modified[i] + (Vector3.up * force) / smoothingFactor;
+                        modified[i] = modified[i] + (direction * force) / smoothingFactor;
                     }
                     else if (Input.GetMouseButton(1)) 
                     {
-                        modified[i] = modified[i] + (Vector3.down * force) / smoothingFactor;
+                        modified[i] = modified[i] + (direction * force) / smoothingFactor;
                     }
                 }
+
             }
+
+
+
         }
         MeshRecalculate();
     }
